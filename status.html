@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>주문 상태 확인</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      background: #f8f5f0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 30px;
+      background: white;
+      border-radius: 20px;
+    }
+
+    h1 {
+      color: #65452f;
+    }
+
+    .status {
+      margin: 30px 0;
+      padding: 25px;
+      background: #f3eee8;
+      border-radius: 15px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    p {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>주문 상태 확인</h1>
+    <p>주문하신 음료의 준비 상태입니다.</p>
+
+    <div class="status" id="order-status">
+      주문 확인 중
+    </div>
+
+    <p id="order-message">
+      잠시만 기다려 주세요.
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("order-status").textContent =
+      "주문 접수 완료";
+
+    document.getElementById("order-message").textContent =
+      "음료를 준비하고 있습니다.";
+  </script>
+</body>
+</html>

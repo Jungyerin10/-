@@ -1,1 +1,697 @@
+/* =========================
+기본 설정
+========================= */
 
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--cream: #fff8ed;
+	--white: #ffffff;
+	--brown: #765039;
+	--dark-brown: #493323;
+	--light-brown: #ead8c5;
+	--accent: #b77b50;
+	--text: #34271e;
+	--muted: #88796d;
+	--shadow: 0 5px 18px rgba(80, 55, 35, 0.09);
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: var(--cream);
+	color: var(--text);
+	font-family: "Noto Sans KR", Arial, sans-serif;
+	font-size: 17px;
+	line-height: 1.6;
+}
+
+button,
+input {
+	font: inherit;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	transition: 0.2s;
+}
+
+button:hover {
+	filter: brightness(0.94);
+	transform: translateY(-1px);
+}
+
+button:focus-visible,
+input:focus-visible {
+	outline: 3px solid #d58c4e;
+	outline-offset: 3px;
+}
+
+/* =========================
+공통
+========================= */
+
+.hidden {
+	display: none !important;
+}
+
+.screen {
+	width: 100%;
+	min-height: 70vh;
+	padding: 35px 20px;
+}
+
+.menu-container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+p {
+	overflow-wrap: break-word;
+}
+
+h2 {
+	color: var(--dark-brown);
+	font-size: 29px;
+	margin-top: 10px;
+}
+
+h3 {
+	color: var(--brown);
+}
+
+p {
+	color: var(--muted);
+}
+
+/* =========================
+상단 헤더
+========================= */
+
+.header {
+	background: var(--white);
+	padding: 18px 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 18px;
+	box-shadow: var(--shadow);
+}
+
+.header h1 {
+	margin: 0;
+	color: var(--brown);
+	font-size: 28px;
+}
+
+.header-controls {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.language-controls,
+.text-controls {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 7px;
+}
+
+.language-button,
+.text-controls button {
+	background: #f3e8dc;
+	color: var(--brown);
+	border-radius: 9px;
+	padding: 9px 13px;
+	font-weight: 600;
+}
+
+.language-button.active {
+	background: var(--brown);
+	color: white;
+}
+
+#accessibility-button {
+	background: #55402e;
+	color: white;
+}
+
+/* =========================
+시작 화면
+========================= */
+
+#welcome-title {
+	font-size: 42px;
+}
+
+.welcome {
+	max-width: 750px;
+	margin: 40px auto;
+	padding: 55px 25px;
+	text-align: center;
+	background: var(--white);
+	border-radius: 25px;
+	box-shadow: var(--shadow);
+}
+
+.welcome-label {
+	color: var(--accent);
+	font-weight: bold;
+	letter-spacing: 5px;
+}
+
+.welcome p {
+	font-size: 18px;
+}
+
+.main-button {
+	background: var(--brown);
+	color: white;
+	border-radius: 13px;
+	padding: 16px 27px;
+	font-size: 18px;
+	font-weight: bold;
+	min-height: 55px;
+}
+
+#start-order {
+	margin-top: 25px;
+	min-width: 250px;
+	min-height: 70px;
+	font-size: 23px;
+}
+
+.qr-order-area {
+	max-width: 430px;
+	margin: 30px auto;
+	padding: 25px;
+	text-align: center;
+	background: white;
+	border-radius: 20px;
+	box-shadow: var(--shadow);
+}
+
+#kiosk-qr-code {
+	display: flex;
+	justify-content: center;
+	margin: 20px auto;
+}
+
+#kiosk-qr-code img,
+#kiosk-qr-code canvas,
+#order-status-qr img,
+#order-status-qr canvas,
+#mobile-status-qr img,
+#mobile-status-qr canvas {
+	max-width: 100%;
+	height: auto;
+	padding: 8px;
+	background: white;
+}
+
+/* =========================
+식사 / 포장 선택
+========================= */
+
+.dining-options {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 25px;
+	margin-top: 45px;
+}
+
+.dining-options button {
+	min-height: 180px;
+	font-size: 25px;
+	border-radius: 20px;
+}
+
+/* =========================
+메뉴 화면
+========================= */
+
+.menu-heading {
+	margin-bottom: 25px;
+}
+
+.category-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 25px 0;
+}
+
+.category {
+	background: var(--light-brown);
+	color: var(--dark-brown);
+	padding: 12px 22px;
+	border-radius: 12px;
+	font-weight: bold;
+	min-height: 48px;
+}
+
+.category.active {
+	background: var(--brown);
+	color: white;
+}
+
+.menu-list {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 22px;
+	margin: 25px 0;
+}
+
+.menu-card {
+	background: white;
+	padding: 22px;
+	border-radius: 18px;
+	box-shadow: var(--shadow);
+	margin-bottom: 18px;
+}
+
+.menu-item {
+	background: white;
+	overflow: hidden;
+	border-radius: 18px;
+	box-shadow: var(--shadow);
+	display: flex;
+	flex-direction: column;
+}
+
+.menu-item img {
+	width: 100%;
+	height: 190px;
+	object-fit: cover;
+	background: #eee3d8;
+}
+
+.menu-item-content {
+	padding: 17px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.menu-item h3 {
+	font-size: 21px;
+	margin: 0 0 5px;
+}
+
+.menu-item p {
+	margin: 5px 0;
+}
+
+.menu-price {
+	color: var(--dark-brown);
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: auto;
+	padding: 10px 0;
+}
+
+.menu-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.menu-actions button {
+	flex: 1;
+	min-height: 45px;
+	border-radius: 9px;
+	font-weight: bold;
+}
+
+.detail-button {
+	background: #eee1d3;
+	color: var(--brown);
+}
+
+.add-button {
+	background: var(--brown);
+	color: white;
+}
+
+/* =========================
+장바구니
+========================= */
+
+.cart-bar {
+	position: sticky;
+	bottom: 0;
+	z-index: 5;
+	background: white;
+	padding: 18px;
+	margin-top: 25px;
+	border-radius: 15px;
+	box-shadow: 0 -4px 15px rgba(60, 40, 20, 0.08);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.cart-bar strong {
+	color: var(--brown);
+	font-size: 20px;
+	margin-right: 15px;
+}
+
+.cart-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 15px;
+	flex-wrap: wrap;
+	background: white;
+	padding: 18px;
+	margin: 12px 0;
+	border-radius: 13px;
+	box-shadow: var(--shadow);
+}
+
+.quantity-controls {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.quantity-controls button {
+	background: var(--light-brown);
+	color: var(--brown);
+	width: 40px;
+	height: 40px;
+	border-radius: 9px;
+	font-weight: bold;
+}
+
+/* =========================
+메뉴 설명 팝업
+========================= */
+
+.modal {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	background: rgba(0, 0, 0, 0.55);
+}
+
+.modal-content {
+	width: 100%;
+	max-width: 550px;
+	max-height: 85vh;
+	overflow-y: auto;
+	position: relative;
+	padding: 30px;
+	border-radius: 20px;
+	background: white;
+	box-shadow: var(--shadow);
+}
+
+.close-button {
+	position: absolute;
+	top: 12px;
+	right: 15px;
+	background: #eee1d3;
+	color: var(--brown);
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+}
+
+#menu-detail-content img {
+	width: 100%;
+	max-height: 280px;
+	object-fit: cover;
+	border-radius: 13px;
+}
+
+/* =========================
+추가 서비스 / 결제
+========================= */
+
+#options-screen .menu-card label {
+	display: flex;
+	align-items: center;
+	gap: 13px;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+input[type="checkbox"] {
+	width: 23px;
+	height: 23px;
+	accent-color: var(--brown);
+}
+
+#phone-number {
+	width: 100%;
+	max-width: 350px;
+	padding: 13px;
+	border: 1px solid var(--light-brown);
+	border-radius: 10px;
+	margin-top: 10px;
+}
+
+#payment-result {
+	text-align: center;
+	padding: 30px;
+}
+
+#order-status-qr,
+#mobile-status-qr {
+	display: flex;
+	justify-content: center;
+	margin: 20px auto;
+}
+
+/* =========================
+휴대폰 주문
+========================= */
+
+#mobile-order-screen,
+#mobile-cart-screen,
+#mobile-complete-screen {
+	max-width: 100%;
+}
+
+#mobile-order-screen .menu-list {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#mobile-order-screen .cart-bar {
+	position: sticky;
+	bottom: 0;
+}
+
+/* =========================
+푸터
+========================= */
+
+.footer {
+	text-align: center;
+	padding: 25px;
+	margin-top: 30px;
+	background: #f0e3d5;
+}
+
+/* =========================
+큰 글씨 모드
+========================= */
+
+body.large-text {
+	font-size: 22px;
+}
+
+body.large-text h2 {
+	font-size: 36px;
+}
+
+body.large-text h3 {
+	font-size: 25px;
+}
+
+body.large-text button {
+	font-size: 21px;
+	min-height: 60px;
+}
+
+body.large-text .menu-item h3 {
+	font-size: 26px;
+}
+
+/* =========================
+접근성 큰 버튼 모드
+========================= */
+
+body.accessibility-mode button {
+	min-height: 72px;
+	min-width: 90px;
+	padding: 17px 23px;
+	font-size: 21px;
+}
+
+body.accessibility-mode .menu-actions {
+	flex-direction: column;
+}
+
+body.accessibility-mode .menu-actions button {
+	width: 100%;
+}
+
+body.accessibility-mode .category-buttons {
+	gap: 15px;
+}
+
+body.accessibility-mode .category {
+	padding: 18px 25px;
+}
+
+body.accessibility-mode .main-button {
+	min-height: 80px;
+	font-size: 24px;
+}
+
+/* =========================
+태블릿
+========================= */
+
+@media (max-width: 900px) {
+	.menu-list {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.header {
+		align-items: flex-start;
+	}
+
+	.header-controls {
+		justify-content: flex-start;
+	}
+}
+
+/* =========================
+휴대폰
+========================= */
+
+@media (max-width: 600px) {
+	body {
+		font-size: 16px;
+	}
+
+	.header {
+		padding: 15px;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.header h1 {
+		font-size: 24px;
+	}
+
+	.header-controls {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.language-controls,
+	.text-controls {
+		justify-content: center;
+	}
+
+	.screen {
+		padding: 20px 12px;
+	}
+
+	.welcome {
+		padding: 35px 18px;
+		margin: 15px auto;
+	}
+
+	#welcome-title {
+		font-size: 32px;
+	}
+
+	.menu-list {
+		grid-template-columns: 1fr;
+		gap: 15px;
+	}
+
+	#mobile-order-screen .menu-list {
+		grid-template-columns: 1fr;
+	}
+
+	.menu-item img {
+		height: 210px;
+	}
+
+	.dining-options {
+		grid-template-columns: 1fr;
+	}
+
+	.dining-options button {
+		min-height: 110px;
+	}
+
+	.cart-bar {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.cart-bar button {
+		width: 100%;
+	}
+
+	.cart-item {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.category-buttons {
+		gap: 8px;
+	}
+
+	.category {
+		padding: 10px 14px;
+	}
+
+	.main-button {
+		width: 100%;
+	}
+
+	.modal-content {
+		padding: 22px;
+	}
+}
+
+/* =========================
+모션 최소화 설정
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+}

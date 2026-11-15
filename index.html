@@ -1,1 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#fff8ed">
 
+	<title>우리 카페 키오스크</title>
+
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+	<h1 id="cafe-title">우리 카페</h1>
+
+	<div class="header-controls">
+		<div class="language-controls">
+			<button class="language-button active" data-lang="ko">한국어</button>
+			<button class="language-button" data-lang="en">English</button>
+			<button class="language-button" data-lang="zh">中文</button>
+			<button class="language-button" data-lang="ja">日本語</button>
+		</div>
+
+		<div class="text-controls">
+			<span id="text-size-label">글자 크기</span>
+			<button id="small-text">작게</button>
+			<button id="large-text">크게</button>
+			<button id="accessibility-button">큰 버튼 모드</button>
+		</div>
+	</div>
+</header>
+
+<main>
+
+	<!-- 시작 화면 -->
+	<section id="start-screen" class="screen">
+		<div class="welcome">
+			<p class="welcome-label">WELCOME</p>
+			<h2 id="welcome-title">안녕하세요!</h2>
+			<p id="welcome-description">
+				원하시는 메뉴를 편하게 주문해 주세요.
+			</p>
+
+			<button id="start-order" class="main-button">
+				메뉴 주문하기
+			</button>
+		</div>
+
+		<div class="qr-order-area">
+			<h3 id="qr-title">휴대폰으로 주문하기</h3>
+			<p id="qr-description">
+				QR코드를 촬영하면 휴대폰으로도 주문할 수 있습니다.
+			</p>
+
+			<div id="kiosk-qr-code"></div>
+
+			<p id="qr-help">
+				카메라로 QR코드를 스캔해 주세요.
+			</p>
+		</div>
+	</section>
+
+
+	<!-- 매장 식사 / 포장 선택 -->
+	<section id="dining-screen" class="screen hidden">
+		<div class="menu-container">
+			<h2 id="dining-title">어떻게 이용하시겠어요?</h2>
+			<p id="dining-description">
+				이용 방법을 선택해 주세요.
+			</p>
+
+			<div class="dining-options">
+				<button id="dine-in-button" class="main-button">
+					🍽️ 매장에서 먹고 가기
+				</button>
+
+				<button id="takeout-button" class="main-button">
+					🥡 포장하기
+				</button>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- 메뉴 선택 화면 -->
+	<section id="menu-screen" class="screen hidden">
+		<div class="menu-container">
+
+			<div class="menu-heading">
+				<h2 id="menu-heading-title">메뉴를 선택해 주세요</h2>
+				<p id="menu-heading-description">
+					원하는 음료와 디저트를 골라 주세요.
+				</p>
+
+				<p id="order-type-display"></p>
+			</div>
+
+			<!-- 메뉴 종류 -->
+			<nav class="category-buttons">
+				<button class="category active" data-category="전체">전체</button>
+				<button class="category" data-category="커피">커피</button>
+				<button class="category" data-category="음료">음료</button>
+				<button class="category" data-category="디저트">디저트</button>
+			</nav>
+
+			<!-- 메뉴 카드 -->
+			<div id="menu-list" class="menu-list"></div>
+
+			<!-- 메뉴 설명 팝업 -->
+			<div id="menu-detail-modal" class="modal hidden">
+				<div class="modal-content">
+					<button id="close-menu-detail" class="close-button">✕</button>
+					<div id="menu-detail-content"></div>
+				</div>
+			</div>
+
+			<!-- 장바구니 요약 -->
+			<div class="cart-bar">
+				<div>
+					<span id="cart-label">담은 메뉴</span>
+					<strong id="cart-count">0개</strong>
+					<span id="total-label">총 금액</span>
+					<strong id="cart-total">0원</strong>
+				</div>
+
+				<button id="go-cart" class="main-button">
+					장바구니 확인
+				</button>
+			</div>
+
+		</div>
+	</section>
+
+
+	<!-- 장바구니 화면 -->
+	<section id="cart-screen" class="screen hidden">
+		<div class="menu-container">
+			<h2 id="cart-heading">장바구니</h2>
+			<p id="cart-description">선택한 메뉴를 확인해 주세요.</p>
+
+			<div id="cart-list"></div>
+
+			<div class="cart-bar">
+				<div>
+					<span id="cart-total-label">총 금액</span>
+					<strong id="cart-page-total">0원</strong>
+				</div>
+
+				<button id="back-menu" class="category">
+					메뉴 더 담기
+				</button>
+
+				<button id="go-options" class="main-button">
+					다음 단계
+				</button>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- 추가 서비스 화면 -->
+	<section id="options-screen" class="screen hidden">
+		<div class="menu-container">
+			<h2 id="options-heading">원하는 서비스를 선택해 주세요</h2>
+			<p id="options-description">
+				필요한 서비스만 선택해 주세요.
+			</p>
+
+			<div class="menu-card">
+				<label>
+					<input type="checkbox" id="recommend-option">
+					<span id="recommend-label">추가 메뉴 추천</span>
+				</label>
+			</div>
+
+			<div class="menu-card">
+				<label>
+					<input type="checkbox" id="point-option">
+					<span id="point-label">포인트 적립</span>
+				</label>
+			</div>
+
+			<div class="menu-card">
+				<label>
+					<input type="checkbox" id="coupon-option">
+					<span id="coupon-label">쿠폰 및 할인</span>
+				</label>
+			</div>
+
+			<button id="skip-options" class="category">
+				선택 없이 넘어가기
+			</button>
+
+			<button id="continue-options" class="main-button">
+				다음 단계
+			</button>
+		</div>
+	</section>
+
+
+	<!-- 결제 화면 -->
+	<section id="payment-screen" class="screen hidden">
+		<div class="menu-container">
+			<h2 id="payment-heading">결제하기</h2>
+			<p id="payment-description">
+				주문하신 메뉴와 금액을 확인해 주세요.
+			</p>
+
+			<div class="menu-card">
+				<h3 id="payment-total-label">최종 결제 금액</h3>
+				<h2 id="payment-total">0원</h2>
+			</div>
+
+			<div class="menu-card">
+				<h3 id="payment-method-heading">결제 방법</h3>
+				<p id="payment-method">💳 카드 결제</p>
+				<p id="payment-instruction">
+					카드를 결제 단말기에 넣거나 태그해 주세요.
+				</p>
+			</div>
+
+			<button id="pay-button" class="main-button">
+				결제 완료
+			</button>
+
+			<div id="payment-result" class="menu-card hidden">
+				<h2 id="payment-success-title">주문이 완료되었습니다!</h2>
+
+				<h3 id="order-number"></h3>
+
+				<div id="completed-items"></div>
+
+				<div id="order-status-qr"></div>
+
+				<p id="order-status-description">
+					QR코드로 주문 진행 상황을 확인할 수 있습니다.
+				</p>
+
+				<button id="home-button" class="main-button">
+					처음으로 돌아가기
+				</button>
+			</div>
+
+			<button id="back-options" class="category">
+				이전 화면으로
+			</button>
+		</div>
+	</section>
+
+
+	<!-- 휴대폰 주문 화면 -->
+	<section id="mobile-order-screen" class="screen hidden">
+		<div class="menu-container">
+			<h2 id="mobile-order-heading">휴대폰 주문</h2>
+			<p id="mobile-order-description">
+				휴대폰에서 편리하게 주문해 주세요.
+			</p>
+
+			<div id="mobile-menu-list" class="menu-list"></div>
+
+			<div class="cart-bar">
+				<div>
+					<span id="mobile-cart-label">담은 메뉴</span>
+					<strong id="mobile-cart-count">0개</strong>
+					<span id="mobile-total-label">총 금액</span>
+					<strong id="mobile-cart-total">0원</strong>
+				</div>
+
+				<button id="mobile-go-cart" class="main-button">
+					장바구니 확인
+				</button>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- 휴대폰 장바구니 화면 -->
+	<section id="mobile-cart-screen" class="screen hidden">
+		<div class="menu-container">
+			<h2 id="mobile-cart-heading">주문 확인</h2>
+
+			<div id="mobile-cart-list"></div>
+
+			<button id="mobile-back-menu" class="category">
+				메뉴 더 담기
+			</button>
+
+			<button id="mobile-go-order" class="main-button">
+				주문하기
+			</button>
+		</div>
+	</section>
+
+
+	<!-- 휴대폰 주문 완료 화면 -->
+	<section id="mobile-complete-screen" class="screen hidden">
+		<div class="menu-container">
+			<h2 id="mobile-complete-heading">주문이 완료되었습니다!</h2>
+
+			<h3 id="mobile-order-number"></h3>
+
+			<p id="mobile-complete-description">
+				주문 진행 상황을 확인할 수 있습니다.
+			</p>
+
+			<div id="mobile-status-qr"></div>
+		</div>
+	</section>
+
+</main>
+
+<footer class="footer">
+	<p id="footer-text">우리 카페에 방문해 주셔서 감사합니다.</p>
+</footer>
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-database-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>
